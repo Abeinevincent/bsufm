@@ -4,13 +4,12 @@ const mongoose = require("mongoose");
 // Create user model
 const VisitorModel = new mongoose.Schema(
   {
-    id: {
+    visitorId: {
       type: String,
       required: true,
     },
     farmerId: {
       type: String,
-
       required: true,
     },
   },

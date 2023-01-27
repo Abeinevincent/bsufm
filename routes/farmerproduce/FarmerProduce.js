@@ -76,11 +76,24 @@ router.get("/findfarmer/:farmerId", verifyToken, async (req, res) => {
   }
 });
 
-// GET ALL FARMERS WITH A PARTICULAR LISTING *******************
+// GET ALL PRODUCE IN THE DB *******************
+// *****
+router.get("/", verifyToken, async (req, res) => {
+  try {
+    const produce = await FarmerProduce.find();
+    return res.status(200).json(produce);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+// GET ALL FARMERS WITH A PARTICULAR PRODUCE LISTING *******************
 // *****
 router.get("/findfarmers/:listingId", verifyToken, async (req, res) => {
   try {
-    const farmers = await Farmer.find();
+    const farmers = await Farmer.find({ listingId: req.params.listingId });
+    return res.status(200).json(farmers);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
