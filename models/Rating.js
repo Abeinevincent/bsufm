@@ -1,0 +1,24 @@
+// Import mongoose ORM
+const mongoose = require("mongoose");
+
+// Create user model
+const RatingModel = new mongoose.Schema(
+  {
+    buyerId: {
+      type: String,
+      required: true,
+    },
+    farmerId: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+// Export this model for import in the routes that will need to use it
+module.exports = mongoose.model("Rating", RatingModel);

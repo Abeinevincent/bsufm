@@ -27,13 +27,8 @@ router.post("/", verifyTokenAndFarmer, async (req, res) => {
 });
 
 // UPDATE FARMER PRODUCE *****************************
-router.put("/:id", verifyTokenAndAuthorisedFarmer, async (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
   try {
-    if (req.body.password) {
-      const salt = await bcrypt.genSalt(10);
-      req.body.password = await bcrypt.hash(req.body.password, salt);
-    }
-
     const updatedFarmerProduce = await FarmerProduce.findByIdAndUpdate(
       req.params.id,
       {
