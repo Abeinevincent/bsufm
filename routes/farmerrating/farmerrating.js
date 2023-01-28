@@ -9,6 +9,7 @@ router.post("/", verifyToken, async (req, res) => {
       farmerId: req.body.farmerId,
       buyerId: req.body.buyerId,
       rating: req.body.rating,
+      ratingComment: req.body.ratingComment,
     });
 
     const savedRating = await rating.save();
@@ -20,7 +21,17 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// GET A FARMER'S RATINGS
+// GET A FARMER'S SINGLE RATINGS
+router.get("/:ratingId", verifyToken, async (req, res) => {
+  try {
+    const ratings = await Rating.find({ _id: req.params.farmerId });
+    res.status(200).json(ratings);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// GET A FARMER'S ALL RATINGS
 router.get("/:farmerId", verifyToken, async (req, res) => {
   try {
     const ratings = await Rating.find({ farmerId: req.params.farmerId });

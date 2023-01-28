@@ -95,4 +95,15 @@ router.get("/findfarmers/:listingId", verifyToken, async (req, res) => {
   }
 });
 
+// DELETE ITEM
+router.delete("/:id", verifyToken, async (req, res) => {
+  try {
+    await FarmerProduce.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: "Item has been deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
 module.exports = router;

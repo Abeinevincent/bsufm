@@ -19,6 +19,7 @@ const BuyerRoute = require("./routes/users/buyer");
 const FarmerRoute = require("./routes/users/farmer");
 const FarmerProduceRoute = require("./routes/farmerproduce/FarmerProduce");
 const VisitorsRoute = require("./routes/users/visitor");
+const RatingsRoute = require("./routes/farmerrating/farmerrating");
 // const errors = require("./routes/errors");
 
 // MongoDB connection
@@ -73,6 +74,7 @@ app.use("/api/users/buyer", BuyerRoute);
 app.use("/api/users/farmer", FarmerRoute);
 app.use("/api/farmerproduce", FarmerProduceRoute);
 app.use("/api/visitors", VisitorsRoute);
+app.use("/api/ratings", RatingsRoute);
 
 // Start the backend server
 const PORT = process.env.PORT || 8800;

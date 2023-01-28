@@ -16,6 +16,9 @@ const RatingModel = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    ratingComment: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
