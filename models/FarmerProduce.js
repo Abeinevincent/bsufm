@@ -24,6 +24,7 @@ const FarmerProduceModel = new mongoose.Schema(
     },
     farmerId: {
       type: String,
+      required: true,
     },
   },
   { timestamps: true }

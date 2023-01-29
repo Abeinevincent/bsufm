@@ -2,26 +2,31 @@
 const mongoose = require("mongoose");
 
 // Create user model
-const RatingModel = new mongoose.Schema(
+const FarmerSpesficsModel = new mongoose.Schema(
   {
-    buyerId: {
+    farmername: {
       type: String,
       required: true,
     },
-    farmerId: {
+    itemname: {
       type: String,
       required: true,
     },
-    ratingnumber: {
+    itemprice: {
+      type: String,
+      required: true,
+    },
+    farmerprofileimage: {
+      type: String,
+      required: true,
+    },
+    quantity: {
       type: Number,
-      required: true,
-    },
-    ratingComment: {
-      type: String,
+      default: 1,
     },
   },
   { timestamps: true }
 );
 
 // Export this model for import in the routes that will need to use it
-module.exports = mongoose.model("Rating", RatingModel);
+module.exports = mongoose.model("FarmerSpesfics", FarmerSpesficsModel);

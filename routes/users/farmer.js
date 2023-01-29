@@ -30,7 +30,7 @@ router.put("/:id", verifyTokenAndAuthorisedFarmer, async (req, res) => {
 });
 
 // GET FARMER ***********************
-router.get("/:id", verifyTokenAndFarmer, async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ _id: req.params.id });
     const { password, ...others } = farmer._doc;
@@ -43,21 +43,14 @@ router.get("/:id", verifyTokenAndFarmer, async (req, res) => {
 
 // GET ALL FARMERS ************************
 
-// CREATE LISTING (FARMER UPLOADS HIS PRODUCE) **********************
-
-// GET SINGLE FARMER'S LISTINGS ***********************
-
-// GET FARMER'S SINGLE LISTING **********************
-
-// GET ALL FARMERS WITH A PARTICULAR LISTING *******************
-
-// // FARMERS RATING *********************************************************
-// CREATE FARMERS RATING ************************
-
-// GET FARMERS RATING ************************
-
-// UPDATE FARMERS RATING ************************
-
-// DELETE FARMERS RATING ************************
+router.get("/", verifyToken, async () => {
+  try {
+    const farmers = await Farmer.find();
+    return res.status(200).json(farmers);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
 
 module.exports = router;

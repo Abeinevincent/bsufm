@@ -19,6 +19,7 @@ router.post("/register", async (req, res) => {
     subcounty: req.body.subcounty,
     profileimage: req.body.profileimage,
     distancefromtarmac: req.body.distancefromtarmac,
+    listingId: req.body.listingId,
     password: hashedPassword,
   });
 

@@ -87,7 +87,9 @@ router.get("/", verifyToken, async (req, res) => {
 // *****
 router.get("/findfarmers/:listingId", verifyToken, async (req, res) => {
   try {
-    const farmers = await Farmer.find({ listingId: req.params.listingId });
+    const farmers = await Farmer.find({
+      listingId: { $in: req.params.listingId },
+    });
     return res.status(200).json(farmers);
   } catch (err) {
     console.log(err);

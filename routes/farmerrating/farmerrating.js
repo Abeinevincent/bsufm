@@ -8,7 +8,7 @@ router.post("/", verifyToken, async (req, res) => {
     const rating = new Rating({
       farmerId: req.body.farmerId,
       buyerId: req.body.buyerId,
-      rating: req.body.rating,
+      ratingnumber: req.body.ratingnumber,
       ratingComment: req.body.ratingComment,
     });
 
@@ -21,7 +21,7 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// GET A FARMER'S SINGLE RATINGS
+// GET A FARMER'S SINGLE RATING
 router.get("/:ratingId", verifyToken, async (req, res) => {
   try {
     const ratings = await Rating.find({ _id: req.params.farmerId });

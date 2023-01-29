@@ -1,54 +1,44 @@
 // Import mongoose ORM
 const mongoose = require("mongoose");
 
-// Create Farmer model
-const FarmerModel = new mongoose.Schema(
+// Create user model
+const CartModel = new mongoose.Schema(
   {
-    fullname: {
+    buyerId: {
       type: String,
       required: true,
-      unique: true,
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    phonenumber: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    district: {
-      type: String,
-      required: true,
-    },
-    subcounty: {
-      type: String,
-      required: true,
-    },
-    profileimage: {
-      type: String,
     },
     listingId: {
-      type: Array,
-      default: [],
-    },
-    isFarmer: {
-      type: Boolean,
-      default: true,
-    },
-    distancefromtarmac: {
       type: String,
-      default: true,
+      required: true,
+    },
+    farmerId: {
+      type: String,
+      required: true,
+    },
+    farmername: {
+      type: String,
+      required: true,
+    },
+    itemname: {
+      type: String,
+      required: true,
+    },
+    itemprice: {
+      type: String,
+      required: true,
+    },
+    farmerprofileimage: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      default: 1,
     },
   },
   { timestamps: true }
 );
 
 // Export this model for import in the routes that will need to use it
-module.exports = mongoose.model("Farmer", FarmerModel);
+module.exports = mongoose.model("Cart", CartModel);
