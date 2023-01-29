@@ -6,10 +6,7 @@ const Rating = require("../../models/Rating");
 router.post("/", verifyToken, async (req, res) => {
   try {
     const rating = new Rating({
-      farmerId: req.body.farmerId,
-      buyerId: req.body.buyerId,
-      ratingnumber: req.body.ratingnumber,
-      ratingComment: req.body.ratingComment,
+      m,
     });
 
     const savedRating = await rating.save();
