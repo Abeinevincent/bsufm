@@ -81,7 +81,6 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     console.log("No file uploaded");
   } else {
     try {
-      console.log(req.file);
       return res
         .status(200)
         .json({ message: "File uploded successfully", file: req.file });

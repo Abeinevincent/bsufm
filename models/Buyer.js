@@ -14,6 +14,9 @@ const BuyerModel = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    profileimage: {
+      type: String,
+    },
     phonenumber: {
       type: String,
       required: true,
