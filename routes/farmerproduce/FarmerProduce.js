@@ -48,7 +48,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 });
 
 // GET FARMER LISTING ***********************
-router.get("/:id", verifyToken, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const farmerProduce = await FarmerProduce.findOne({ _id: req.params.id });
     res.status(200).json(farmerProduce);
@@ -59,7 +59,7 @@ router.get("/:id", verifyToken, async (req, res) => {
 });
 
 // GET A FARMER'S ALL LISTINGS ************************
-router.get("/findfarmer/:farmerId", verifyToken, async (req, res) => {
+router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const farmerProduce = await FarmerProduce.find({
       farmerId: req.params.farmerId,
@@ -72,8 +72,9 @@ router.get("/findfarmer/:farmerId", verifyToken, async (req, res) => {
 });
 
 // GET ALL PRODUCE IN THE DB *******************
+
 // *****
-router.get("/", verifyToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const produce = await FarmerProduce.find();
     return res.status(200).json(produce);

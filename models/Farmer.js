@@ -33,6 +33,13 @@ const FarmerModel = new mongoose.Schema(
     },
     profileimage: {
       type: String,
+      default: "",
+    },
+    longtude: {
+      type: Number,
+    },
+    latitude: {
+      type: Number,
     },
     listingId: {
       type: Array,

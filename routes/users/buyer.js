@@ -28,7 +28,7 @@ router.put("/update/:id", verifyTokenAndAuthorisedBuyer, async (req, res) => {
 });
 
 // GET BUYER ***********************
-router.get("/:id", verifyTokenAndAuthorisedBuyer, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const user = await Buyer.findById(req.params.id);
     const { password, ...others } = user._doc;

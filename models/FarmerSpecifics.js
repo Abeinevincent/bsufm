@@ -4,7 +4,15 @@ const mongoose = require("mongoose");
 // Create user model
 const FarmerSpesficsModel = new mongoose.Schema(
   {
+    farmerId: {
+      type: String,
+      required: true,
+    },
     farmername: {
+      type: String,
+      required: true,
+    },
+    farmerdistrict: {
       type: String,
       required: true,
     },
@@ -12,17 +20,16 @@ const FarmerSpesficsModel = new mongoose.Schema(
       type: String,
       required: true,
     },
-    itemprice: {
+    itemquantity: {
+      type: String,
+      required: true,
+    },
+    itemstatus: {
       type: String,
       required: true,
     },
     farmerprofileimage: {
       type: String,
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      default: 1,
     },
   },
   { timestamps: true }

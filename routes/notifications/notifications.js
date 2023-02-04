@@ -3,7 +3,7 @@ const { verifyToken } = require("../../helpers/token");
 const Notifications = require("../../models/Notifications");
 
 // Create notifications
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newNotifications = new Notifications(req.body);
     const savedNotification = await newNotifications.save();
@@ -15,10 +15,11 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 // Get all notifications of a partcular farmer
-router.get("findall/:farmerId", verifyToken, async (req, res) => {
+router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const notifications = await Notifications.find({
       farmerId: req.params.farmerId,
+      sendTo: "farmer",
     });
     return res.status(200).json(notifications);
   } catch (err) {
@@ -28,10 +29,11 @@ router.get("findall/:farmerId", verifyToken, async (req, res) => {
 });
 
 // Get all notifications of a partcular buyer
-router.get("findall/:buyerId", verifyToken, async (req, res) => {
+router.get("/findbuyer/:buyerId", verifyToken, async (req, res) => {
   try {
     const notifications = await Notifications.find({
       buyerId: req.params.buyerId,
+      sendTo: "buyer",
     });
     return res.status(200).json(notifications);
   } catch (err) {

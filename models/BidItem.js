@@ -1,10 +1,22 @@
 // Import mongoose ORM
 const mongoose = require("mongoose");
 
-// Create Notifications model
-const NotificationsModel = new mongoose.Schema(
+// Create user model
+const BidItemModel = new mongoose.Schema(
   {
-    farmerId: {
+    itemname: {
+      type: String,
+      required: true,
+    },
+    itemquantity: {
+      type: String,
+      required: true,
+    },
+    itemprice: {
+      type: String,
+      required: true,
+    },
+    buyerprice: {
       type: String,
       required: true,
     },
@@ -12,11 +24,7 @@ const NotificationsModel = new mongoose.Schema(
       type: String,
       required: true,
     },
-    sendTo: {
-      type: String,
-      required: true,
-    },
-    message: {
+    farmerId: {
       type: String,
       required: true,
     },
@@ -25,4 +33,4 @@ const NotificationsModel = new mongoose.Schema(
 );
 
 // Export this model for import in the routes that will need to use it
-module.exports = mongoose.model("Notifications", NotificationsModel);
+module.exports = mongoose.model("BidItem", BidItemModel);

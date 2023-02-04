@@ -30,7 +30,7 @@ router.put("/:id", verifyTokenAndAuthorisedFarmer, async (req, res) => {
 });
 
 // GET FARMER ***********************
-router.get("/:id", verifyToken, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ _id: req.params.id });
     const { password, ...others } = farmer._doc;
@@ -43,7 +43,7 @@ router.get("/:id", verifyToken, async (req, res) => {
 
 // GET ALL FARMERS ************************
 
-router.get("/", verifyToken, async () => {
+router.get("/", async (req, res) => {
   try {
     const farmers = await Farmer.find();
     return res.status(200).json(farmers);
