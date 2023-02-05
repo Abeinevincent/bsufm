@@ -26,7 +26,7 @@ router.get("/:ratingId", verifyToken, async (req, res) => {
 });
 
 // GET A FARMER'S ALL RATINGS
-router.get("/:farmerId", verifyToken, async (req, res) => {
+router.get("/:farmerId", async (req, res) => {
   try {
     const ratings = await Rating.find({ farmerId: req.params.farmerId });
     res.status(200).json(ratings);
