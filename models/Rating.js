@@ -12,6 +12,14 @@ const RatingModel = new mongoose.Schema(
       type: String,
       required: true,
     },
+    buyerImage: {
+      type: String,
+      required: true,
+    },
+    buyerName: {
+      type: String,
+      required: true,
+    },
     ratingnumber: {
       type: Number,
       required: true,
