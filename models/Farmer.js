@@ -37,9 +37,11 @@ const FarmerModel = new mongoose.Schema(
     },
     longitude: {
       type: Number,
+      required: true,
     },
     latitude: {
       type: Number,
+      required: true,
     },
     listingId: {
       type: Array,
