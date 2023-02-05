@@ -35,7 +35,7 @@ const FarmerModel = new mongoose.Schema(
       type: String,
       default: "",
     },
-    longtude: {
+    longitude: {
       type: Number,
     },
     latitude: {

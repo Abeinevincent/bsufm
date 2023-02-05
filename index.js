@@ -63,7 +63,6 @@ let s3 = new S3Client({
 
 const upload = multer({
   storage: multerS3({
-    // acl: "public-read",
     s3,
     bucket: process.env.S3_BUCKET_NAME,
     contentType: multerS3.AUTO_CONTENT_TYPE,

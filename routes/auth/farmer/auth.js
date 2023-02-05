@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
     profileimage: req.body.profileimage,
     distancefromtarmac: req.body.distancefromtarmac,
     listingId: req.body.listingId,
-    longtude: req.body.longtude,
+    longitude: req.body.longitude,
     latitude: req.body.latitude,
     password: hashedPassword,
   });
