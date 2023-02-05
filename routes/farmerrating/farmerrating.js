@@ -3,7 +3,7 @@ const { verifyToken } = require("../../helpers/token");
 const Rating = require("../../models/Rating");
 
 // Create Rating
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const rating = new Rating(req.body);
     const savedRating = await rating.save();
