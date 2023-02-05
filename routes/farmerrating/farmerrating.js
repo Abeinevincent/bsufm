@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 });
 
 // GET A FARMER'S SINGLE RATING
-router.get("/:ratingId", verifyToken, async (req, res) => {
+router.get("/:ratingId", async (req, res) => {
   try {
     const ratings = await Rating.find({ _id: req.params.farmerId });
     res.status(200).json(ratings);
@@ -26,7 +26,7 @@ router.get("/:ratingId", verifyToken, async (req, res) => {
 });
 
 // GET A FARMER'S ALL RATINGS
-router.get("/:farmerId", async (req, res) => {
+router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const ratings = await Rating.find({ farmerId: req.params.farmerId });
     res.status(200).json(ratings);
