@@ -19,7 +19,9 @@ router.put("/update/:id", verifyTokenAndAuthorisedBuyer, async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ message: "Buyer has been updated", updatedBuyer });
+    return res
+      .status(200)
+      .json({ message: "Buyer has been updated", updatedBuyer });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -53,9 +55,9 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await Buyer.findById(req.params.id);
     const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    return res.status(200).json(others);
   } catch (err) {
-    res.status(500).json(err);
+    return res.status(500).json(err);
   }
 });
 
@@ -64,7 +66,7 @@ router.get("/getbuyer/:email", async (req, res) => {
   try {
     const buyer = await Buyer.findOne({ email: req.params.email });
     const { password, ...others } = buyer._doc;
-    res.status(200).json({ ...others });
+    return res.status(200).json({ ...others });
   } catch (err) {
     return res.status(500).json(err);
   }

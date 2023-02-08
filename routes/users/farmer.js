@@ -46,7 +46,9 @@ router.put("/updatepassword/:id", async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ message: "User's password has been updated" });
+    return res
+      .status(200)
+      .json({ message: "User's password has been updated" });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
@@ -58,7 +60,7 @@ router.get("/:id", async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ _id: req.params.id });
     const { password, ...others } = farmer._doc;
-    res.status(200).json({ ...others });
+    return res.status(200).json({ ...others });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
@@ -70,7 +72,7 @@ router.get("/getfarmer/:email", async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ email: req.params.email });
     const { password, ...others } = farmer._doc;
-    res.status(200).json({ ...others });
+    return res.status(200).json({ ...others });
   } catch (err) {
     return res.status(500).json(err);
   }

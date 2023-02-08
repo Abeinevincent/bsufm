@@ -64,8 +64,9 @@ router.post("/login", async (req, res) => {
       req.body.password,
       user.password
     );
-    !validPassword &&
-      res.status(400).json("Incorrect password, please try again!");
+    if (!validPassword) {
+      return res.status(400).json("Incorrect password, please try again!");
+    }
 
     // Token payload
     const tokenPayload = {
