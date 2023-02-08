@@ -5,6 +5,7 @@ const {
   verifyTokenAndFarmer,
   verifyToken,
 } = require("../../helpers/token");
+const bcrypt = require("bcrypt");
 
 // UPDATE FARMER *****************************
 router.put("/:id", verifyTokenAndAuthorisedFarmer, async (req, res) => {
@@ -23,6 +24,29 @@ router.put("/:id", verifyTokenAndAuthorisedFarmer, async (req, res) => {
     );
 
     res.status(200).json({ message: "Farmer has been updated", updatedFarmer });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+// UPDATE FARMER PASSWORD *****************************
+router.put("/updatepassword/:id", async (req, res) => {
+  try {
+    if (req.body.password) {
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt);
+    }
+
+    await Farmer.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: { password: req.body.password },
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Farmer's password has been updated" });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);

@@ -65,7 +65,7 @@ router.post("/login", async (req, res) => {
       user.password
     );
     !validPassword &&
-      res.status(400).json("Incorrect pasword, please try again!");
+      res.status(400).json("Incorrect password, please try again!");
 
     // Token payload
     const tokenPayload = {
@@ -84,6 +84,7 @@ router.post("/login", async (req, res) => {
       token: generateToken(tokenPayload),
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 });

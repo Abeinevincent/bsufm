@@ -74,10 +74,10 @@ router.post("/sendotp", async (req, res) => {
 
 router.post("/confirmotp", async (req, res) => {
   try {
-    const otp = await OTP.find({ otp: req.body.otp, email: req.body.email });
+    const otp = await OTP.findOne({ otp: req.body.otp, email: req.body.email });
 
     if (!otp) {
-      return res.status(400).send("Farmer with given email doesn't exist");
+      return res.status(400).send("Incorrect otp");
     } else {
       const otpDetails = new VerifyOTP(req.body);
       await otpDetails.save();
