@@ -27,6 +27,7 @@ const NotificationsRoute = require("./routes/notifications/notifications");
 const FarmerSpecificsRoute = require("./routes/farmerspecifics/farmerspecifics");
 const CartRoute = require("./routes/cart/cart");
 const BidRoute = require("./routes/notifications/biditem");
+const OTPRoute = require("./helpers/passwordrecovery");
 // const errors = require("./routes/errors");
 
 // MongoDB connection
@@ -82,7 +83,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     try {
       return res
         .status(200)
-        .json({ message: "File uploded successfully", file: req.file });
+        .json({ message: "File uploaded successfully", file: req.file });
     } catch (error) {
       return console.error(error);
     }
@@ -118,6 +119,7 @@ app.use("/api/cart", CartRoute);
 app.use("/api/notifications", NotificationsRoute);
 app.use("/api/farmerspecifics", FarmerSpecificsRoute);
 app.use("/api/biditem", BidRoute);
+app.use("/api/otp", OTPRoute);
 
 // Start the backend server
 const PORT = process.env.PORT || 8800;
