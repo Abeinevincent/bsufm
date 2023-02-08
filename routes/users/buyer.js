@@ -59,4 +59,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// GET FARMER BY EMAIL ***********************
+router.get("/getbuyer/:email", async (req, res) => {
+  try {
+    const buyer = await Buyer.findOne({ email: req.params.email });
+    const { password, ...others } = buyer._doc;
+    res.status(200).json({ ...others });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 module.exports = router;
