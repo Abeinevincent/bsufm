@@ -65,6 +65,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// GET FARMER BY EMAIL ***********************
+router.get("/:email", async (req, res) => {
+  try {
+    const farmer = await Farmer.findOne({ email: req.params.email });
+    const { password, ...others } = farmer._doc;
+    res.status(200).json({ ...others });
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 // GET ALL FARMERS ************************
 
 router.get("/", async (req, res) => {
