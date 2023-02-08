@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const Farmer = require("../models/Farmer");
 const crypto = require("crypto");
 const { google } = require("googleapis");
+const Buyer = require("../models/Buyer");
 
 const OAuth2 = google.auth.OAuth2;
 
@@ -51,8 +52,9 @@ const sendEmail = async (email, subject, text) => {
 router.post("/sendotp", async (req, res) => {
   try {
     const user = await Farmer.findOne({ email: req.body.email });
-    if (!user) {
-      return res.status(400).send("Farmer with provided email doesn't exist");
+    const buyer = await Buyer.findOne({ email: req.body.email });
+    if (!user && !buyer) {
+      return res.status(400).send("User with provided email doesn't exist");
     } else {
       const recoveryDetails = new OTP(req.body);
       await sendEmail(

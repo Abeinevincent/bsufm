@@ -46,7 +46,7 @@ router.put("/updatepassword/:id", async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ message: "Farmer's password has been updated" });
+    res.status(200).json({ message: "User's password has been updated" });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
