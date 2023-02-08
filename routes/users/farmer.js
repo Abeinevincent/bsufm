@@ -66,7 +66,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // GET FARMER BY EMAIL ***********************
-router.get("/:email", async (req, res) => {
+router.get("/getfarmer/:email", async (req, res) => {
   try {
     const farmer = await Farmer.findOne({ email: req.params.email });
     const { password, ...others } = farmer._doc;
