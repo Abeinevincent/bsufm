@@ -42,7 +42,7 @@ const sendEmail = async (email, subject, text) => {
       text: text,
     });
 
-    console.log("email sent sucessfully");
+    console.log("Email sent sucessfully");
   } catch (error) {
     console.log(error, "email not sent");
   }
@@ -50,15 +50,15 @@ const sendEmail = async (email, subject, text) => {
 
 router.post("/sendotp", async (req, res) => {
   try {
-    const user = await Farmer.find({ email: req.body.email });
+    const user = await Farmer.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(400).send("Farmer with given email doesn't exist");
+      return res.status(400).send("Farmer with provided email doesn't exist");
     } else {
       const recoveryDetails = new OTP(req.body);
       await sendEmail(
-        "abeinevincent@gmail.com",
+        req.body.email,
         "Password Reset",
-        req.body.otp
+        `Your One Time Password is ${req.body.otp}`
       );
 
       await recoveryDetails.save();
