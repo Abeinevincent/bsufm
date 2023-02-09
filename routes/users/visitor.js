@@ -5,14 +5,23 @@ const Visitor = require("../../models/Visitor");
 // Create Visitor
 router.post("/", verifyToken, async (req, res) => {
   try {
-    const visitor = new Visitor({
-      farmerId: req.body.farmerId,
+    const visitordetails = await Visitor.findOne({
       visitorId: req.body.visitorId,
+      farmerId: req.body.farmerId,
     });
 
-    const savedVisitor = await visitor.save();
+    if (visitordetails) {
+      return res.status(400).json("Visitor already counted");
+    } else {
+      const visitor = new Visitor({
+        farmerId: req.body.farmerId,
+        visitorId: req.body.visitorId,
+      });
 
-    res.status(200).json(savedVisitor);
+      const savedVisitor = await visitor.save();
+
+      return res.status(200).json(savedVisitor);
+    }
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
