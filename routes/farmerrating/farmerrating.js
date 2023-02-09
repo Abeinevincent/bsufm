@@ -5,10 +5,18 @@ const Rating = require("../../models/Rating");
 // Create Rating
 router.post("/", async (req, res) => {
   try {
-    const rating = new Rating(req.body);
-    const savedRating = await rating.save();
+    const ratingdetails = await Rating.findOne({
+      buyerId: req.body.buyerId,
+      farmerId: req.body.farmerId,
+    });
+    if (ratingdetails) {
+      return res.status(400).json("You already rated this farmer");
+    } else {
+      const rating = new Rating(req.body);
+      const savedRating = await rating.save();
 
-    res.status(200).json(savedRating);
+      return res.status(200).json(savedRating);
+    }
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
