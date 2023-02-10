@@ -15,7 +15,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 // Get all items in a farmerspecifics of a partcular farmer
-router.get("findall/:itemname", async (req, res) => {
+router.get("/findall/:itemname", async (req, res) => {
   try {
     const farmerspecifics = await FarmerSpesfics.find({
       itemname: req.params.itemname,
