@@ -14,30 +14,8 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// Get sum of farmers with a specific produce
-// router.get("/farmers/:produceName", async (req, res) => {
-//   try {
-//     const results = await FarmerSpesfics.aggregate([
-//       {
-//         $match: {
-//           itemname: req.params.produceName,
-//         },
-//       },
-//       {
-//         $group: {
-//           _id: null,
-//           sumOfColumn: { $sum: "$itemprice" },
-//         },
-//       },
-//     ]).exec();
-//     res.status(200).json(results);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
-
 // Get all items in a farmerspecifics of a partcular farmer
-router.get("findall/:itemname", verifyToken, async (req, res) => {
+router.get("findall/:itemname", async (req, res) => {
   try {
     const farmerspecifics = await FarmerSpesfics.find({
       itemname: req.params.itemname,
