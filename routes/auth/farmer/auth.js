@@ -39,6 +39,7 @@ router.post("/register", async (req, res) => {
         .status(201)
         .json({ message: "Farmer has been created successfully", user });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
     }
   }
