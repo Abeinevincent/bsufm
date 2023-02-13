@@ -7,23 +7,32 @@ const FarmerProduceModel = new mongoose.Schema(
     itemname: {
       type: String,
       required: true,
+      required: true,
     },
     itemimage: {
       type: String,
+      required: true,
     },
     itemquantity: {
+      type: String,
+      required: true,
+    },
+    unit: {
       type: String,
     },
     itemstatus: {
       type: String,
       required: true,
+      required: true,
     },
     itemprice: {
       type: String,
       required: true,
+      required: true,
     },
     farmerId: {
       type: String,
+      required: true,
       required: true,
     },
   },

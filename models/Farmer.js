@@ -29,7 +29,6 @@ const FarmerModel = new mongoose.Schema(
     },
     subcounty: {
       type: String,
-      required: true,
     },
     profileimage: {
       type: String,
