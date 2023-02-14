@@ -10,14 +10,21 @@ router.post("/", async (req, res) => {
       itemname: req.body.itemname,
     });
 
+    // Convert to tonnes if quantity is greater than 1000
+    const quantity = req.body.itemquantity;
+    const unit = req.body.itemunit;
+
     if (existingItem) {
-      // If it does, update its quantity
-      const newQuantity = existingItem.itemquantity + req.body.itemquantity;
-      await AllProduce.findOneAndUpdate(
+      // If it exists, update its quantity
+      const updatedQuantity = existingItem.itemquantity + req.body.itemquantity;
+      const updatedProduce = await AllProduce.findOneAndUpdate(
         { itemname: req.body.itemname },
-        { $set: { itemquantity: newQuantity }, new: true }
+        {
+          $set: { itemquantity: updatedQuantity },
+          new: true,
+        }
       );
-      return res.status(200).json("Successfully updated");
+      return res.status(200).json({ message: "Successfully updated" });
     } else {
       // If it doesn't, create a new item
       const newProduce = new AllProduce(req.body);

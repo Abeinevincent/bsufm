@@ -12,7 +12,7 @@ const AllProduceModel = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    unit: {
+    itemunit: {
       type: String,
     },
   },

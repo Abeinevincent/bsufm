@@ -9,14 +9,7 @@ const Farmer = require("../../models/Farmer");
 
 // CREATE FARMER PRODUCE *****************************
 router.post("/", verifyTokenAndFarmer, async (req, res) => {
-  const farmerProduce = new FarmerProduce({
-    itemname: req.body.itemname,
-    itemimage: req.body.itemimage,
-    itemprice: req.body.itemprice,
-    itemstatus: req.body.itemstatus,
-    itemquantity: req.body.itemquantity,
-    farmerId: req.body.farmerId,
-  });
+  const farmerProduce = new FarmerProduce(req.body);
   try {
     const produce = await farmerProduce.save();
     return res.status(201).json(produce);
