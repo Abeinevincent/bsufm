@@ -14,7 +14,7 @@ const FarmerProduceModel = new mongoose.Schema(
       required: true,
     },
     itemquantity: {
-      type: String,
+      type: Number,
       required: true,
     },
     unit: {
