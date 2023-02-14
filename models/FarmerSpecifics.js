@@ -24,7 +24,7 @@ const FarmerSpesficsModel = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    unit: {
+    itemunit: {
       type: String,
       required: true,
     },
