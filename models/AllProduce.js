@@ -15,6 +15,10 @@ const AllProduceModel = new mongoose.Schema(
     itemunit: {
       type: String,
     },
+    itemimage: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
