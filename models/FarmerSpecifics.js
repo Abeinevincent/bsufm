@@ -22,11 +22,9 @@ const FarmerSpesficsModel = new mongoose.Schema(
     },
     itemquantity: {
       type: Number,
-      required: true,
     },
     itemunit: {
       type: String,
-      required: true,
     },
     itemstatus: {
       type: String,

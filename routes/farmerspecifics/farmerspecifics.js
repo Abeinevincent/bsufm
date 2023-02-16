@@ -5,9 +5,17 @@ const FarmerSpesfics = require("../../models/FarmerSpecifics");
 // Create farmerspecifics
 router.post("/", verifyToken, async (req, res) => {
   try {
-    const newFarmerSpesfics = new FarmerSpesfics(req.body);
-    const savedfarmer = await newFarmerSpesfics.save();
-    return res.status(200).json(savedfarmer);
+    const farmer = await FarmerSpesfics.findOne({
+      farmername: req.body.farmername,
+      itemname: req.body.itemname,
+    });
+    if (farmer) {
+      return res.status(400).json("Farmer already uploaded this produce");
+    } else {
+      const newFarmerSpesfics = new FarmerSpesfics(req.body);
+      const savedfarmer = await newFarmerSpesfics.save();
+      return res.status(200).json(savedfarmer);
+    }
   } catch (err) {
     console.log(err);
     return res.status(200).json(err);

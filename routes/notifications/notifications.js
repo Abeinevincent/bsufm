@@ -19,7 +19,7 @@ router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const notifications = await Notifications.find({
       farmerId: req.params.farmerId,
-      sendTo: "farmer",
+      sendTo: "Farmer",
     });
     return res.status(200).json(notifications);
   } catch (err) {
@@ -33,7 +33,7 @@ router.get("/findbuyer/:buyerId", verifyToken, async (req, res) => {
   try {
     const notifications = await Notifications.find({
       buyerId: req.params.buyerId,
-      sendTo: "buyer",
+      sendTo: "Buyer",
     });
     return res.status(200).json(notifications);
   } catch (err) {

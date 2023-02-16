@@ -10,7 +10,6 @@ const AllProduceModel = new mongoose.Schema(
     },
     itemquantity: {
       type: Number,
-      required: true,
     },
     itemunit: {
       type: String,
