@@ -38,4 +38,4 @@ const FarmerSpesficsModel = new mongoose.Schema(
 );
 
 // Export this model for import in the routes that will need to use it
-module.exports = mongoose.model("FarmerSpesfics", FarmerSpesficsModel);
+module.exports = mongoose.model("FarmerSpecifics", FarmerSpesficsModel);

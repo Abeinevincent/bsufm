@@ -104,7 +104,6 @@ async function getImage(bucket, key) {
 
 app.use("/image/:key", async (req, res) => {
   const image = await getImage(process.env.S3_BUCKET_NAME, req.params.key);
-  // res.set('Content-Type', 'image/jpeg');
   res.status(200).json(image);
 });
 

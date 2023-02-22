@@ -1,19 +1,19 @@
 const router = require("express").Router();
-const { verifyToken } = require("../../helpers/token");
-const FarmerSpesfics = require("../../models/FarmerSpecifics");
+const { verifyToken, verifyTokenAndFarmer } = require("../../helpers/token");
+const FarmerSpecifics = require("../../models/FarmerSpecifics");
 
 // Create farmerspecifics
 router.post("/", verifyToken, async (req, res) => {
   try {
-    const farmer = await FarmerSpesfics.findOne({
+    const farmer = await FarmerSpecifics.findOne({
       farmername: req.body.farmername,
       itemname: req.body.itemname,
     });
     if (farmer) {
       return res.status(400).json("Farmer already uploaded this produce");
     } else {
-      const newFarmerSpesfics = new FarmerSpesfics(req.body);
-      const savedfarmer = await newFarmerSpesfics.save();
+      const newFarmerSpecifics = new FarmerSpecifics(req.body);
+      const savedfarmer = await newFarmerSpecifics.save();
       return res.status(200).json(savedfarmer);
     }
   } catch (err) {
@@ -25,7 +25,7 @@ router.post("/", verifyToken, async (req, res) => {
 // Get all items in a farmerspecifics of a partcular farmer
 router.get("/findall/:itemname", async (req, res) => {
   try {
-    const farmerspecifics = await FarmerSpesfics.find({
+    const farmerspecifics = await FarmerSpecifics.find({
       itemname: req.params.itemname,
     });
     return res.status(200).json(farmerspecifics);
@@ -34,5 +34,65 @@ router.get("/findall/:itemname", async (req, res) => {
     return res.status(200).json(err);
   }
 });
+
+// Delete an item by id from farmerspecifics
+router.delete("/:id", async (req, res) => {
+  try {
+    await FarmerSpecifics.findByIdAndDelete(req.params.id);
+    return res.status(200).json({ message: "Item has been deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+// UPDATE ITEM *****************************
+router.put("/:itemname/:farmername", async (req, res) => {
+  try {
+    const availableItem = await FarmerSpecifics.findOne({
+      itemname: req.params.itemname,
+      farmername: req.params.farmername,
+    });
+
+    if (availableItem) {
+      const updatedItem = await FarmerSpecifics.findOneAndUpdate(
+        { itemname: req.params.itemname, farmername: req.params.farmername },
+        {
+          $set: { itemquantity: req.body.itemquantity },
+          new: true,
+        }
+      );
+      return res.status(200).json({ message: "Successfully updated" });
+    } else {
+      return res.status(400).json("Farmer with that Item doesnot exist");
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(200).json(err);
+  }
+});
+
+// DELETE ITEM FROM FARMERSPECIFICS DATABASE ***********
+router.delete(
+  "/remove/farmer/:farmerId",
+  verifyTokenAndFarmer,
+  async (req, res) => {
+    try {
+      const availableFarmer = await FarmerSpecifics.findOne({
+        farmerId: req.params.farmerId,
+        itemname: req.body.itemname,
+      });
+      console.log(availableFarmer);
+      await FarmerSpecifics.findOneAndDelete({
+        farmerId: req.params.farmerId,
+        itemname: req.body.itemname,
+      });
+      return res.status(200).json({ message: "Item has been deleted" });
+    } catch (err) {
+      console.log(err);
+      return res.status(200).json(err);
+    }
+  }
+);
 
 module.exports = router;

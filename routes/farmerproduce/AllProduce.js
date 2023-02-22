@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { verifyToken } = require("../../helpers/token");
+const { verifyToken, verifyTokenAndFarmer } = require("../../helpers/token");
 const AllProduce = require("../../models/AllProduce");
 
 // CREATE ALL PRODUCE *****************************
@@ -44,6 +44,27 @@ router.get("/", async (req, res) => {
   try {
     const produce = await AllProduce.find();
     return res.status(200).json(produce);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+// UPDATE PRODUCE ****************************
+router.put("/update/:itemname", verifyTokenAndFarmer, async (req, res) => {
+  try {
+    const existingItem = await AllProduce.findOne({
+      itemname: req.params.itemname,
+    });
+    const updatedQuantity = existingItem.itemquantity - req.body.itemquantity;
+    await AllProduce.findOneAndUpdate(
+      { itemname: req.params.itemname },
+      {
+        $set: { itemquantity: updatedQuantity },
+        new: true,
+      }
+    );
+    return res.status(200).json({ message: "Successfully updated" });
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
