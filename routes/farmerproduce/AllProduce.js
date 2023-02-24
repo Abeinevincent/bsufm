@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { verifyToken, verifyTokenAndFarmer } = require("../../helpers/token");
 const AllProduce = require("../../models/AllProduce");
+const FarmerProduce = require("../../models/FarmerProduce");
 
 // CREATE ALL PRODUCE *****************************
 router.post("/", async (req, res) => {
@@ -51,14 +52,22 @@ router.get("/", async (req, res) => {
 });
 
 // UPDATE PRODUCE ****************************
-router.put("/update/:itemname", async (req, res) => {
+router.put("/update/:itemname/:farmerId", async (req, res) => {
   try {
     const existingItem = await AllProduce.findOne({
       itemname: req.params.itemname,
     });
+    const farmerzItem = await FarmerProduce.findOne({
+      itemname: req.params.itemname,
+      farmerId: req.params.farmerId,
+    });
+
+    console.log(farmerzItem);
+
     const updatedQuantity =
-      existingItem.itemquantity -
-      (existingItem.itemquantity - req.body.itemquantity);
+      existingItem?.itemquantity -
+      (farmerzItem?.itemquantity - req.body.itemquantity);
+
     await AllProduce.findOneAndUpdate(
       { itemname: req.params.itemname },
       {
