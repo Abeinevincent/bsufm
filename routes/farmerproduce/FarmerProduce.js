@@ -20,7 +20,7 @@ router.post("/", verifyTokenAndFarmer, async (req, res) => {
 });
 
 // UPDATE FARMER PRODUCE *****************************
-router.put("/:id", verifyToken, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const updatedFarmerProduce = await FarmerProduce.findByIdAndUpdate(
       req.params.id,
