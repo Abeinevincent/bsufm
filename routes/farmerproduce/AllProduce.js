@@ -51,7 +51,7 @@ router.get("/", async (req, res) => {
 });
 
 // UPDATE PRODUCE ****************************
-router.put("/update/:itemname", verifyTokenAndFarmer, async (req, res) => {
+router.put("/update/:itemname", async (req, res) => {
   try {
     const existingItem = await AllProduce.findOne({
       itemname: req.params.itemname,

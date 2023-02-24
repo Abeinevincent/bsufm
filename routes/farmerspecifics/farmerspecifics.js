@@ -73,26 +73,22 @@ router.put("/:itemname/:farmername", async (req, res) => {
 });
 
 // DELETE ITEM FROM FARMERSPECIFICS DATABASE ***********
-router.delete(
-  "/remove/farmer/:farmerId",
-  verifyTokenAndFarmer,
-  async (req, res) => {
-    try {
-      const availableFarmer = await FarmerSpecifics.findOne({
-        farmerId: req.params.farmerId,
-        itemname: req.body.itemname,
-      });
-      console.log(availableFarmer);
-      await FarmerSpecifics.findOneAndDelete({
-        farmerId: req.params.farmerId,
-        itemname: req.body.itemname,
-      });
-      return res.status(200).json({ message: "Item has been deleted" });
-    } catch (err) {
-      console.log(err);
-      return res.status(200).json(err);
-    }
+router.delete("/remove/farmer/:farmerId", async (req, res) => {
+  try {
+    const availableFarmer = await FarmerSpecifics.findOne({
+      farmerId: req.params.farmerId,
+      itemname: req.body.itemname,
+    });
+    console.log(availableFarmer);
+    await FarmerSpecifics.findOneAndDelete({
+      farmerId: req.params.farmerId,
+      itemname: req.body.itemname,
+    });
+    return res.status(200).json({ message: "Item has been deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(200).json(err);
   }
-);
+});
 
 module.exports = router;
