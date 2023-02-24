@@ -36,15 +36,15 @@ router.get("/findall/:itemname", async (req, res) => {
 });
 
 // Delete an item by id from farmerspecifics
-router.delete("/:id", async (req, res) => {
-  try {
-    await FarmerSpecifics.findByIdAndDelete(req.params.id);
-    return res.status(200).json({ message: "Item has been deleted" });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
-  }
-});
+// router.delete("/:id", async (req, res) => {
+//   try {
+//     await FarmerSpecifics.findByIdAndDelete(req.params.id);
+//     return res.status(200).json({ message: "Item has been deleted" });
+//   } catch (err) {
+//     console.log(err);
+//     return res.status(500).json(err);
+//   }
+// });
 
 // UPDATE ITEM *****************************
 router.put("/:itemname/:farmername", async (req, res) => {
