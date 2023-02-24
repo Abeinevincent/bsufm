@@ -56,7 +56,9 @@ router.put("/update/:itemname", verifyTokenAndFarmer, async (req, res) => {
     const existingItem = await AllProduce.findOne({
       itemname: req.params.itemname,
     });
-    const updatedQuantity = existingItem.itemquantity - req.body.itemquantity;
+    const updatedQuantity =
+      existingItem.itemquantity -
+      (existingItem.itemquantity - req.body.itemquantity);
     await AllProduce.findOneAndUpdate(
       { itemname: req.params.itemname },
       {
