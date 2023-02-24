@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     if (existingItem) {
       // If it exists, update its quantity
       const updatedQuantity = existingItem.itemquantity + req.body.itemquantity;
-      const updatedProduce = await AllProduce.findOneAndUpdate(
+      await AllProduce.findOneAndUpdate(
         { itemname: req.body.itemname },
         {
           $set: { itemquantity: updatedQuantity },
@@ -66,7 +66,7 @@ router.put("/update/:itemname/:farmerId", async (req, res) => {
 
     const updatedQuantity =
       existingItem?.itemquantity -
-      (farmerzItem?.itemquantity - req.body.itemquantity);
+      (farmerzItem?.itemquantity - Number(req.body.itemquantity));
 
     await AllProduce.findOneAndUpdate(
       { itemname: req.params.itemname },
