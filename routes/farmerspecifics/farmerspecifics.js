@@ -35,17 +35,6 @@ router.get("/findall/:itemname", async (req, res) => {
   }
 });
 
-// Delete an item by id from farmerspecifics
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     await FarmerSpecifics.findByIdAndDelete(req.params.id);
-//     return res.status(200).json({ message: "Item has been deleted" });
-//   } catch (err) {
-//     console.log(err);
-//     return res.status(500).json(err);
-//   }
-// });
-
 // UPDATE ITEM *****************************
 router.put("/:itemname/:farmername", async (req, res) => {
   try {
@@ -73,18 +62,22 @@ router.put("/:itemname/:farmername", async (req, res) => {
 });
 
 // DELETE ITEM FROM FARMERSPECIFICS DATABASE ***********
-router.delete("/remove/farmer/:farmerId", async (req, res) => {
+router.delete("/remove/farmer/:farmerId/:itemname", async (req, res) => {
   try {
     const availableFarmer = await FarmerSpecifics.findOne({
       farmerId: req.params.farmerId,
-      itemname: req.body.itemname,
+      itemname: req.params.itemname,
     });
     console.log(availableFarmer);
-    await FarmerSpecifics.findOneAndDelete({
-      farmerId: req.params.farmerId,
-      itemname: req.body.itemname,
-    });
-    return res.status(200).json({ message: "Item has been deleted" });
+    if (availableFarmer) {
+      await FarmerSpecifics.findOneAndDelete({
+        farmerId: req.params.farmerId,
+        itemname: req.params.itemname,
+      });
+      return res.status(200).json({ message: "Item has been deleted" });
+    } else {
+      return res.status(200).json("Farmer is not with this item");
+    }
   } catch (err) {
     console.log(err);
     return res.status(200).json(err);

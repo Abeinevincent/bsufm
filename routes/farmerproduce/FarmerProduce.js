@@ -32,7 +32,6 @@ router.put("/:id", async (req, res) => {
 
     res.status(200).json({
       message: "FarmerProduce has been updated",
-      updatedFarmerProduce,
     });
   } catch (err) {
     console.log(err);
@@ -40,18 +39,18 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// GET FARMER LISTING ***********************
+// GET FARMER LISTING ********************************************************
 router.get("/:id", async (req, res) => {
   try {
     const farmerProduce = await FarmerProduce.findOne({ _id: req.params.id });
-    res.status(200).json(farmerProduce);
+    return res.status(200).json(farmerProduce);
   } catch (err) {
     console.log(err);
     return res.status(500).json(err);
   }
 });
 
-// GET A FARMER'S ALL LISTINGS ************************
+// GET A FARMER'S ALL LISTINGS **************************************************
 router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const farmerProduce = await FarmerProduce.find({
@@ -64,9 +63,7 @@ router.get("/findfarmer/:farmerId", async (req, res) => {
   }
 });
 
-// GET ALL PRODUCE IN THE DB *******************
-
-// *****
+// GET ALL PRODUCE IN THE DB ****************************************
 router.get("/", async (req, res) => {
   try {
     const produce = await FarmerProduce.find();
@@ -78,7 +75,6 @@ router.get("/", async (req, res) => {
 });
 
 // GET ALL FARMERS WITH A PARTICULAR PRODUCE LISTING *******************
-// *****
 router.get("/findfarmers/:listingId", verifyToken, async (req, res) => {
   try {
     const farmers = await Farmer.find({
