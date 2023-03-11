@@ -29,7 +29,7 @@ router.get("/findfarmer/:farmerId", async (req, res) => {
 });
 
 // Get all notifications of a partcular buyer
-router.get("/findbuyer/:buyerId", verifyToken, async (req, res) => {
+router.get("/findbuyer/:buyerId", async (req, res) => {
   try {
     const notifications = await Notifications.find({
       buyerId: req.params.buyerId,

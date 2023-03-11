@@ -9,13 +9,23 @@ const Farmer = require("../../models/Farmer");
 
 // CREATE FARMER PRODUCE *****************************
 router.post("/", verifyTokenAndFarmer, async (req, res) => {
-  const farmerProduce = new FarmerProduce(req.body);
-  try {
-    const produce = await farmerProduce.save();
-    return res.status(201).json(produce);
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
+  const availableItem = await FarmerProduce.findOne({
+    itemname: req.body.itemname,
+    farmerId: req.body.farmerId,
+  });
+  console.log(availableItem);
+  if (availableItem) {
+    console.log("Already");
+    return res.status(400).json("Item already exists");
+  } else {
+    const farmerProduce = new FarmerProduce(req.body);
+    try {
+      const produce = await farmerProduce.save();
+      return res.status(201).json(produce);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
   }
 });
 
@@ -50,11 +60,25 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// GET A FARMER'S ALL LISTINGS **************************************************
+// GET A FARMER'S ALL LISTINGS ***********************************************************
 router.get("/findfarmer/:farmerId", async (req, res) => {
   try {
     const farmerProduce = await FarmerProduce.find({
       farmerId: req.params.farmerId,
+    });
+    return res.status(200).json(farmerProduce);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
+// GET A FARMER'S PARTICULAR LISTING ****************************************************
+router.get("/findfarmer/:farmerId/:itemname", async (req, res) => {
+  try {
+    const farmerProduce = await FarmerProduce.findOne({
+      farmerId: req.params.farmerId,
+      itemname: req.params.itemname,
     });
     return res.status(200).json(farmerProduce);
   } catch (err) {

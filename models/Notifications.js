@@ -12,6 +12,14 @@ const NotificationsModel = new mongoose.Schema(
       type: String,
       required: true,
     },
+    itemname: {
+      type: String,
+      required: true,
+    },
+    farmername: {
+      type: String,
+      required: true,
+    },
     sendTo: {
       type: String,
       required: true,

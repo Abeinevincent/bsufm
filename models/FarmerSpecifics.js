@@ -20,6 +20,10 @@ const FarmerSpesficsModel = new mongoose.Schema(
       type: String,
       required: true,
     },
+    itemprice: {
+      type: String,
+      required: true,
+    },
     itemquantity: {
       type: Number,
     },
