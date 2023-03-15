@@ -17,21 +17,6 @@ router.post("/", async (req, res) => {
       const newBidItem = new BidItem(req.body);
       const savedBidItem = await newBidItem.save();
 
-      // Also update the db on the item bid by reducing its amount by the one bid ****************
-      // const farmerproduce = await FarmerProduce.findOne({ farmerId, itemname });
-      // await FarmerProduce.findOneAndUpdate(
-      //   {
-      //     farmerId,
-      //     itemname,
-      //   },
-      //   {
-      //     $set: {
-      //       itemquantity: itemquantity - req.body.itemquantity,
-      //     },
-      //     new: true,
-      //   }
-      // );
-
       return res.status(200).json(savedBidItem);
     } catch (err) {
       console.log(err);

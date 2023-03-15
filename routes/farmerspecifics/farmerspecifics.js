@@ -35,6 +35,20 @@ router.get("/findall/:itemname", async (req, res) => {
   }
 });
 
+// Get all items in a farmerspecifics of a partcular farmer oof a particular district
+router.get("/findall/:itemname/:districtname", async (req, res) => {
+  try {
+    const farmerspecifics = await FarmerSpecifics.find({
+      itemname: req.params.itemname,
+      farmerdistrict: req.params.districtname,
+    });
+    return res.status(200).json(farmerspecifics);
+  } catch (err) {
+    console.log(err);
+    return res.status(200).json(err);
+  }
+});
+
 // UPDATE ITEM *****************************
 router.put("/:itemname/:farmername", async (req, res) => {
   try {
