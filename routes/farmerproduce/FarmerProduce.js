@@ -6,6 +6,7 @@ const {
   verifyTokenAndFarmer,
 } = require("../../helpers/token");
 const Farmer = require("../../models/Farmer");
+const AllProduce = require("../../models/AllProduce");
 
 // CREATE FARMER PRODUCE *****************************
 router.post("/", verifyTokenAndFarmer, async (req, res) => {
@@ -39,6 +40,17 @@ router.put("/:id", async (req, res) => {
       },
       { new: true }
     );
+
+    // Also update all produce
+    // try{
+
+    //   const updatedProduce = await AllProduce.findOneAndUpdate({
+    //     itemname: req.body.itemname
+    //   })
+
+    // } catch(err){
+    //   console.log(err)
+    // }
 
     res.status(200).json({
       message: "FarmerProduce has been updated",
