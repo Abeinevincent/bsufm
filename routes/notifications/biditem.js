@@ -22,61 +22,61 @@ router.post("/", async (req, res) => {
       const savedBidItem = await newBidItem.save();
 
       // Update farmer produce to take away the bid items(quantity)******************
-      try {
-        const findFarmerAndUpdate = await FarmerProduce.findOneAndUpdate(
-          {
-            itemname,
-            farmerId,
-          },
-          {
-            $set: {
-              itemquantity: itemquantity - quantitybuyerneeds,
-            },
-            new: true,
-          }
-        );
-        console.log("Successfully updated farmer produce");
+      // try {
+      //   const findFarmerAndUpdate = await FarmerProduce.findOneAndUpdate(
+      //     {
+      //       itemname,
+      //       farmerId,
+      //     },
+      //     {
+      //       $set: {
+      //         itemquantity: itemquantity - quantitybuyerneeds,
+      //       },
+      //       new: true,
+      //     }
+      //   );
+      //   console.log("Successfully updated farmer produce");
 
-        // Update farmer specifics to take away the bid items(quantity)******************
-        try {
-          const findFarmerSpecificsAndUpdate =
-            await FarmerSpecifics.findOneAndUpdate(
-              {
-                itemname,
-                farmerId,
-              },
-              {
-                $set: {
-                  itemquantity: itemquantity - quantitybuyerneeds,
-                },
-                new: true,
-              }
-            );
+      //   // Update farmer specifics to take away the bid items(quantity)******************
+      //   try {
+      //     const findFarmerSpecificsAndUpdate =
+      //       await FarmerSpecifics.findOneAndUpdate(
+      //         {
+      //           itemname,
+      //           farmerId,
+      //         },
+      //         {
+      //           $set: {
+      //             itemquantity: itemquantity - quantitybuyerneeds,
+      //           },
+      //           new: true,
+      //         }
+      //       );
 
-          // Update all produce to take away the bid items(quantity)******************
-          try {
-            const findAllProduceAndUpdate = await AllProduce.findOneAndUpdate(
-              {
-                itemname,
-              },
-              {
-                $set: {
-                  itemquantity: itemquantity - quantitybuyerneeds,
-                },
-                new: true,
-              }
-            );
-          } catch (err) {
-            console.log(err, "Error occured updating all produce");
-          }
+      //     // Update all produce to take away the bid items(quantity)******************
+      //     try {
+      //       const findAllProduceAndUpdate = await AllProduce.findOneAndUpdate(
+      //         {
+      //           itemname,
+      //         },
+      //         {
+      //           $set: {
+      //             itemquantity: itemquantity - quantitybuyerneeds,
+      //           },
+      //           new: true,
+      //         }
+      //       );
+      //     } catch (err) {
+      //       console.log(err, "Error occured updating all produce");
+      //     }
 
-          console.log("Successfully updated farmer specifics");
-        } catch (err) {
-          console.log(err, "Error occured updating farmer specifics");
-        }
-      } catch (err) {
-        console.log(err, "Error occured updating farmer produce");
-      }
+      //     console.log("Successfully updated farmer specifics");
+      //   } catch (err) {
+      //     console.log(err, "Error occured updating farmer specifics");
+      //   }
+      // } catch (err) {
+      //   console.log(err, "Error occured updating farmer produce");
+      // }
 
       return res.status(200).json(savedBidItem);
     } catch (err) {
