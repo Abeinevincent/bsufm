@@ -17,6 +17,7 @@ router.post("/register", async (req, res) => {
     phonenumber: req.body.phonenumber,
     district: req.body.district,
     subcounty: req.body.subcounty,
+    country: req.body.country,
     profileimage: req.body.profileimage,
     distancefromtarmac: req.body.distancefromtarmac,
     listingId: req.body.listingId,

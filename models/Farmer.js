@@ -27,6 +27,10 @@ const FarmerModel = new mongoose.Schema(
       type: String,
       required: true,
     },
+    country: {
+      type: String,
+      required: true,
+    },
     subcounty: {
       type: String,
     },
