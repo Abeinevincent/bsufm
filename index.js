@@ -125,5 +125,5 @@ app.use("/api/biditem", BidRoute);
 // Start the backend server
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
-  console.log(`Backend server is listening at port ${PORT}`);
+  console.log(`Backend server is listening at port ${PORT}`)
 });
