@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 const InserminateSchema = new Schema(
   {
     totalPigs: {
-      type: String,
+      type: Number,
       required: true,
     },
     pigsOnHeat: {
-      type: String,
+      type: Number,
       required: true,
     },
 

@@ -13,7 +13,8 @@ router.post("/", async (req, res) => {
       farmername,
       farmerContact,
     });
-    return res.status(201).json(newInserm);
+    const savedInserm = await newInserm.save();
+    return res.status(201).json(savedInserm);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
