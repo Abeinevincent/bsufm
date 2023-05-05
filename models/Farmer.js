@@ -54,6 +54,10 @@ const FarmerModel = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
     distancefromtarmac: {
       type: String,
       default: true,
