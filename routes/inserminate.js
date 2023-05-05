@@ -17,7 +17,17 @@ router.post("/", async (req, res) => {
     return res.status(201).json(savedInserm);
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    return res.status(500).json(err);
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const inserms = await Inserminate.find();
+    return res.status(200).json(inserms);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
   }
 });
 
