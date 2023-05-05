@@ -28,8 +28,7 @@ const NotificationsRoute = require("./routes/notifications/notifications");
 const FarmerSpecificsRoute = require("./routes/farmerspecifics/farmerspecifics");
 const CartRoute = require("./routes/cart/cart");
 const BidRoute = require("./routes/notifications/biditem");
-// const OTPRoute = require("./helpers/passwordrecovery");
-// const errors = require("./routes/errors");
+const InserminateRoute = require("./routes/inserminate");
 
 // MongoDB connection
 mongoose
@@ -120,10 +119,10 @@ app.use("/api/cart", CartRoute);
 app.use("/api/notifications", NotificationsRoute);
 app.use("/api/farmerspecifics", FarmerSpecificsRoute);
 app.use("/api/biditem", BidRoute);
-// app.use("/api/otp", OTPRoute);
+app.use("/api/inserminate", InserminateRoute);
 
 // Start the backend server
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
-  console.log(`Backend server is listening at port ${PORT}`)
+  console.log(`Backend server is listening at port ${PORT}`);
 });
