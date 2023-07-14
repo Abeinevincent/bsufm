@@ -38,14 +38,6 @@ const FarmerModel = new mongoose.Schema(
       type: String,
       default: "",
     },
-    longitude: {
-      type: Number,
-      required: true,
-    },
-    latitude: {
-      type: Number,
-      required: true,
-    },
     listingId: {
       type: Array,
       default: [],
@@ -60,7 +52,6 @@ const FarmerModel = new mongoose.Schema(
     },
     distancefromtarmac: {
       type: String,
-      default: true,
     },
   },
   { timestamps: true }

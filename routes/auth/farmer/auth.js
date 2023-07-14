@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   const newFarmer = new Farmer({
-    fullname: req.body.fullname,
+    fullname: req.body.fullName,
     email: req.body.email,
     phonenumber: req.body.phonenumber,
     district: req.body.district,
@@ -21,8 +21,6 @@ router.post("/register", async (req, res) => {
     profileimage: req.body.profileimage,
     distancefromtarmac: req.body.distancefromtarmac,
     listingId: req.body.listingId,
-    longitude: req.body.longitude,
-    latitude: req.body.latitude,
     password: hashedPassword,
   });
 
